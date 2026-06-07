@@ -8,6 +8,10 @@ export const authUser = async (req, res, next) => {
     if (!token) {
         return res.status(401).json({ message: "Unauthorized" });
     }
+    const isBlackLilsted = await userModel.findOne({ token: token })
+    if(isBlackLilsted){
+        return res.status(401).json({message: "Unauthorized"})
+    }
     try {
         const decoded = jwt.verify(token,process.env.Jwt_SECRET)
         const user = await userModel.findById(decoded.id)
