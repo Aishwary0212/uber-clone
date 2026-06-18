@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import {connectToDB} from "./db/db.js";
 dotenv.config();
 import userRoutes from "./routes/user.routes.js";
-
+import captainRoutes from "./routes/captain.routes.js";
 const app=express();
 app.use(cors());
 app.use(express.json());
@@ -19,6 +19,7 @@ app.get("/",(req,res)=>{
     res.send("hello");
 })
 app.use('/users', userRoutes);
+app.use('/captain', captainRoutes);
 
 
 
